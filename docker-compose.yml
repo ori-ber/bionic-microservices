@@ -1,0 +1,24 @@
+version: '3'
+services:
+  mysqldb:
+    image: mysql:5.7
+    container_name: mysqldb
+    ports:
+      - "3306:3306"
+    environment:
+     MYSQL_ROOT_PASSWORD: admin
+     MYSQL_DATABASE: catalog
+  catalog-service:
+    container_name: catalog-service
+    build: ./catalog-service
+    ports:
+      - "18181:8181"
+      - "19797:8787"
+    depends_on:
+      - mysqldb
+    entrypoint: /bin/sh
+    command: >
+      -c "
+      java -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=8787,suspend=n -jar -Dspring.profiles.active=docker /app.jar
+      "
+
