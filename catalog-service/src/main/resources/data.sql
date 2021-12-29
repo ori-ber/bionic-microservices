@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS products(id BIGINT, codevarchar(255), name varchar(255),description varchar(255), price double);
+CREATE TABLE IF NOT EXISTS products(id BIGINT, code varchar(255), name varchar(255),description varchar(255), price double);
 DELETE FROM products;
 
 insert into products(id, code, name, description, price) VALUES
