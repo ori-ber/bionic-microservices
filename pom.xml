@@ -12,8 +12,10 @@
 	<description>bionic microservices project</description>
 
 	<modules>
-		<module>catalog-service</module>
 		<module>config-server</module>
+		<module>catalog-service</module>
+		<module>registry-service</module>
+		<module>inventory-service</module>
 	</modules>
 
 </project>
