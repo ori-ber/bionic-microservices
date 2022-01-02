@@ -34,18 +34,16 @@ public class InventoryController {
         }
     }
 
-    // @GetMapping("/api/inventory/code/{productCode}")
-    // public ResponseEntity<InventoryItem>
-    // findInventoryByProduct(@PathVariable("productCode") String productCode) {
-    // log.info("Finding inventory for product code :" + productCode);
-    // Optional<InventoryItem> inventoryItem =
-    // inventoryItemRepository.findByProductCode(productCode);
-    // if (inventoryItem.isPresent()) {
-    // return new ResponseEntity(inventoryItem, HttpStatus.OK);
-    // } else {
-    // return new ResponseEntity(HttpStatus.NOT_FOUND);
-    // }
-    // }
+    @GetMapping("/api/inventory/code/{productCode}")
+    public ResponseEntity<InventoryItem> findInventoryByProduct(@PathVariable("productCode") String productCode) {
+        log.info("Finding inventory for product code :" + productCode);
+        Optional<InventoryItem> inventoryItem = inventoryItemRepository.findByProductCode(productCode);
+        if (inventoryItem.isPresent()) {
+            return new ResponseEntity(inventoryItem, HttpStatus.OK);
+        } else {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+    }
 
     @GetMapping("/api/inventory")
     public List<InventoryItem> getInventory() {
