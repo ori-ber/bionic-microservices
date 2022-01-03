@@ -17,5 +17,5 @@ public class Product {
     private String description;
     private double price;
     @Transient
-    private boolean inStock = true;
+    private boolean inStock = false;
 }
