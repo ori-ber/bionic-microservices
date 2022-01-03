@@ -57,7 +57,7 @@ public class ProductService {
         if (productOptional.isPresent()) {
             log.info("Fetching inventory level for product_code: " + code);
             ResponseEntity<ProductInventoryResponse> itemResponseEntity = restTemplate.getForEntity(
-                    "http://inventory-service/api/inventory/YYY/{code}",
+                    "http://inventory-service/api/inventor/{code}",
                     ProductInventoryResponse.class,
                     code);
             if (itemResponseEntity.getStatusCode() == HttpStatus.OK) {
