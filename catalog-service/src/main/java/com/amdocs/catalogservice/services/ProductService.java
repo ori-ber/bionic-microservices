@@ -37,7 +37,7 @@ public class ProductService {
         if (productOptional.isPresent()) {
             log.info("Fetching inventory level for product_code: " + code);
             ResponseEntity<ProductInventoryResponse> itemResponseEntity = restTemplate.getForEntity(
-                    "http://inventory-service/api/inventory/{code}",
+                    "http://inventory-service/api/inventory/{productCode}",
                     ProductInventoryResponse.class,
                     code);
             if (itemResponseEntity.getStatusCode() == HttpStatus.OK) {
@@ -52,24 +52,25 @@ public class ProductService {
         return productOptional;
     }
 
-    public Optional<Product> findProductByXXXCode(String code) {
-        Optional<Product> productOptional = productRepository.findByCode(code);
-        if (productOptional.isPresent()) {
-            log.info("Fetching inventory level for product_code: " + code);
-            ResponseEntity<ProductInventoryResponse> itemResponseEntity = restTemplate.getForEntity(
-                    "http://inventory-service/api/inventory/YYY/{code}",
-                    ProductInventoryResponse.class,
-                    code);
-            if (itemResponseEntity.getStatusCode() == HttpStatus.OK) {
-                Integer quantity = itemResponseEntity.getBody().getAvailableQuantity();
-                log.info("Available quantity: " + quantity);
-                productOptional.get().setInStock(quantity > 0);
-            } else {
-                log.error("Unable to get inventory level for product_code: " + code +
-                        ", StatusCode: " + itemResponseEntity.getStatusCode());
-            }
-        }
-        return productOptional;
-    }
+    // public Optional<Product> findProductByXXXCode(String code) {
+    // Optional<Product> productOptional = productRepository.findByCode(code);
+    // if (productOptional.isPresent()) {
+    // log.info("Fetching inventory level for product_code: " + code);
+    // ResponseEntity<ProductInventoryResponse> itemResponseEntity =
+    // restTemplate.getForEntity(
+    // "http://inventory-service/api/inventory/code/{code}",
+    // ProductInventoryResponse.class,
+    // code);
+    // if (itemResponseEntity.getStatusCode() == HttpStatus.OK) {
+    // Integer quantity = itemResponseEntity.getBody().getAvailableQuantity();
+    // log.info("Available quantity: " + quantity);
+    // productOptional.get().setInStock(quantity > 0);
+    // } else {
+    // log.error("Unable to get inventory level for product_code: " + code +
+    // ", StatusCode: " + itemResponseEntity.getStatusCode());
+    // }
+    // }
+    // return productOptional;
+    // }
 
 }
