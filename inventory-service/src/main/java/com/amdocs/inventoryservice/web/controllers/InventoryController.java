@@ -40,17 +40,15 @@ public class InventoryController {
         return inventoryItemRepository.findAll();
     }
 
-    // @GetMapping("/api/inventory/praveen/{quantity}")
-    // public ResponseEntity<InventoryItem>
-    // findInventoryByQuantity(@PathVariable("productCode") String productCode) {
-    // log.info("Finding inventory for product code :" + productCode);
-    // Optional<InventoryItem> inventoryItem =
-    // inventoryItemRepository.findByProductCode(productCode);
-    // if (inventoryItem.isPresent()) {
-    // return new ResponseEntity(inventoryItem, HttpStatus.OK);
-    // } else {
-    // return new ResponseEntity(HttpStatus.NOT_FOUND);
-    // }
-    // }
+    @GetMapping("/api/inventory/newapi/{quantity}")
+    public ResponseEntity<InventoryItem> findInventoryByQuantity(@PathVariable("productCode") String productCode) {
+        log.info("Finding inventory for product code :" + productCode);
+        Optional<InventoryItem> inventoryItem = inventoryItemRepository.findByProductCode(productCode);
+        if (inventoryItem.isPresent()) {
+            return new ResponseEntity(inventoryItem, HttpStatus.OK);
+        } else {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+    }
 
 }
